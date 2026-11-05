@@ -800,6 +800,14 @@ button.oitem .on small{color:var(--terra)}
  .hero2 .cta{margin-top:18px}
  .hero2 .tag-float{display:none}
 }
+
+/* v55 재입고 배너: 헤더 아래에 붙어서 따라오고, 닫기 버튼만 */
+#restock{position:sticky;top:var(--stk,62px);z-index:45}
+#restock .rsw{padding-bottom:2px}
+#restock .rsb{margin-top:8px;padding:8px 8px 8px 8px;gap:8px;cursor:default;animation:rsIn .7s cubic-bezier(.2,.9,.25,1) both}
+#restock .rsm{flex:1;min-width:0;display:flex;align-items:center;gap:12px;text-align:left;background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer;min-height:58px}
+#restock .rsx{position:static;flex:none;width:34px;height:34px;border-radius:50%;background:rgba(74,50,8,.12);color:#6b4a0c;opacity:1;display:grid;place-items:center;z-index:2}
+#restock .rsx:hover{background:rgba(74,50,8,.2)}
 </style>
 
 <div id="chrome"></div>
@@ -1284,7 +1292,7 @@ function restockBar(){const box=$('#restock');if(!box)return;
  const l=cur==='manage'?[]:restockList();
  if(!l.length){box.innerHTML='';return}
  const p=l[0];const more=l.length>1?` 외 ${l.length-1}개`:'';
- box.innerHTML=`<div class="rsw"><button class="rsb" data-restock="${p.id}" aria-label="${esc(p.name)} 재입고 안내"><img src="${src(p)}" alt=""><span class="tx"><small>Back in stock</small><b>${esc(p.name)}${more}</b><span>재입고 됐어요! 눌러서 만나보세요</span></span><span class="go">${ic('arrow',20)}</span></button><button class="rsx" data-restock-x="${p.id}" aria-label="닫기">${ic('close',16)}</button></div>`}
+ box.innerHTML=`<div class="rsw"><div class="rsb"><button class="rsm" data-restock="${p.id}" aria-label="${esc(p.name)} 재입고 안내"><img src="${src(p)}" alt=""><span class="tx"><small>Back in stock</small><b>${esc(p.name)}${more}</b><span>재입고 됐어요! 눌러서 만나보세요</span></span></button><button class="rsx" data-restock-x="${p.id}" aria-label="닫기">${ic('close',16)}</button></div></div>`}
 /* ---------- owner gate ---------- */
 const PINK='handdu-pin';
 const hsh=t=>{let a=0xdeadbeef^7,b=0x41c6ce57^7;for(let i=0;i<t.length;i++){const c=t.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);return (4294967296*(2097151&b)+(a>>>0)).toString(36)};
