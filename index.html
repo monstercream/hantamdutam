@@ -818,7 +818,8 @@ button.oitem .on small{color:var(--terra)}
 .ylim .yh{height:86%;margin-right:4px}.ylim .yd{display:inline-flex;height:100%;gap:1px}.ylim .yg{height:86%;margin-left:3px}
 .rank.medal{width:46px;height:auto;background:none!important;box-shadow:none;font:0/0 a;border-radius:0;top:8px;left:8px;filter:drop-shadow(0 6px 6px rgba(60,35,10,.35))}
 .rank.medal img{display:block;width:100%;height:auto}
-.bestgrid .rank.medal{width:min(46px,12vw)}
+.bestgrid .rank.medal{width:clamp(24px,26%,46px);top:6px;left:6px}
+@media (max-width:620px){.rank.medal{width:34px;top:6px;left:6px}.bestgrid .rank.medal{width:27px}}
 </style>
 
 <div id="chrome"></div>
