@@ -388,7 +388,7 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-in
 /* ---- scroll storytelling ---- */
 .sprog{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,#8A6A2C,#F3DFA2,#C8A25A);transform-origin:left;transform:scaleX(0);pointer-events:none}
 .hs{position:relative}
-.hs-sticky,.pin-sticky{position:sticky;top:var(--stk,62px);height:calc(100vh - var(--stk,62px) - var(--tb,0px));display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.hs-sticky,.pin-sticky{position:sticky;top:var(--stk,62px);height:var(--sh,calc(100vh - var(--stk,62px) - var(--tb,0px)));display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .hs-track{display:flex;gap:20px;padding:34px var(--gy) 30px var(--gx);will-change:transform;width:max-content}
 .hs-track .card{flex:0 0 min(300px,74vw)}
 .hs-end{flex:0 0 min(250px,64vw);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;border:1.5px dashed var(--gold);border-radius:24px;padding:24px;font-family:var(--f-display);font-size:20px;color:var(--gold-ink);line-height:1.4}
@@ -1491,11 +1491,11 @@ function fxSetup(){
 function fxMeasure(){
  const top=$('#top');FX.stk=top?Math.round(top.getBoundingClientRect().bottom):62;
  const tb=$('.tabbar');const tbh=tb&&tb.offsetHeight?tb.offsetHeight:0;
- FX.vh=innerHeight;FX.vw=innerWidth;
+ {const w=innerWidth,h=innerHeight;if(FX.lw!==w||Math.abs(h-(FX.vm||0))>=160)FX.vm=h;else FX.vm=Math.max(FX.vm,h);FX.lw=w;FX.vh=FX.vm;FX.vw=document.documentElement.clientWidth||w}
  const st=document.documentElement.style;st.setProperty('--stk',FX.stk+'px');st.setProperty('--tb',tbh+'px');
- FX.sh=Math.max(320,FX.vh-FX.stk-tbh);
+ FX.sh=Math.max(320,FX.vh-FX.stk-tbh);st.setProperty('--sh',FX.sh+'px');
  if(!reduce){
-  FX.hs.forEach(o=>{o.dist=Math.max(0,o.t.offsetWidth-FX.vw);o.w.style.height=(FX.sh+o.dist)+'px'});
+  FX.hs.forEach(o=>{o.dist=Math.max(0,Math.ceil(o.t.getBoundingClientRect().width)-FX.vw);o.w.style.height=(FX.sh+o.dist)+'px'});
   FX.pin.forEach(o=>{o.total=Math.max(1,(o.n-1)*FX.vh*.8+FX.vh*.2);o.w.style.height=(FX.sh+o.total)+'px'});
   FX.wp.forEach(o=>{o.total=FX.vh*1.15;o.w.style.height=(FX.sh+o.total)+'px'})}
  fxTick()}
