@@ -802,8 +802,9 @@ button.oitem .on small{color:var(--terra)}
 }
 
 /* v55 재입고 배너: 헤더 아래에 붙어서 따라오고, 닫기 버튼만 */
-#restock{position:sticky;top:var(--stk,62px);z-index:45}
-#restock .rsw{padding-bottom:2px}
+#restock{position:sticky;top:var(--stk,62px);height:0;z-index:45;overflow:visible}
+#restock .rsw{position:absolute;left:0;right:0;top:0;pointer-events:none}
+#restock .rsb{pointer-events:auto}
 #restock .rsb{margin-top:8px;padding:8px 8px 8px 8px;gap:8px;cursor:default;animation:rsIn .7s cubic-bezier(.2,.9,.25,1) both}
 #restock .rsm{flex:1;min-width:0;display:flex;align-items:center;gap:12px;text-align:left;background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer;min-height:58px}
 #restock .rsx{position:static;flex:none;width:34px;height:34px;border-radius:50%;background:rgba(74,50,8,.12);color:#6b4a0c;opacity:1;display:grid;place-items:center;z-index:2}
